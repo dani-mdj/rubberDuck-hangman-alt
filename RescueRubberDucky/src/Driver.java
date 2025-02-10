@@ -25,7 +25,7 @@ public class Driver {
 			if(consoleMode) {
 				ui = new DuckyConsole(hang);
 			}else {
-				ui = new DuckyConsole(hang);//replace with other UI than Console or whatever
+				ui = new RubberDuckGUI(hang);//replace with other UI than Console or whatever
 			}
 			boolean gameOn = true;
 			
