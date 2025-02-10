@@ -4,6 +4,8 @@ public interface IHangmanUI {
 	abstract void drawBoard();
 	void introduction();
 	boolean playAgain();
-	boolean playerTurn();
+	void celebrate();
+	void gameOver();
+	char getInput();
 
 }

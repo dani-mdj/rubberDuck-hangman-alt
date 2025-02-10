@@ -116,11 +116,8 @@ public class Hangman {
 	}
 	
 	public boolean validGuess(char guess) {
-		boolean notGuessed = false;
-		
-		System.out.print(guess);
+		boolean notGuessed = false;		
 		if ((new String(guessedLetters)).contains(""+guess)) {
-			System.out.print(guess);
 			notGuessed = false;
 		}else {
 			notGuessed = true;

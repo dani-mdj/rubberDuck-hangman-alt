@@ -6,17 +6,19 @@
  */
 import java.util.Scanner;
 
+import hangmanInterface.IHangmanUI;
+
 
 /*
  * This class interacts with the console to act as a user interface for the game
  */
-public class DuckyConsole {
+public class DuckyConsole implements IHangmanUI {
 	Hangman hang;
 	Scanner userInput = new Scanner(System.in);
 	
 	//constructor initializes hangman game
-	public DuckyConsole() {
-		hang = new Hangman();
+	public DuckyConsole(Hangman hangman) {
+		hang = hangman;
 	}
 	
 	//"draws" the interface to the console
@@ -92,7 +94,7 @@ public class DuckyConsole {
 	//method only takes the first character entered and nothing else
 	//if they don't guess a valid character it will keep asking
 	//does not check if letter is already guessed 
-	private char getInput() {
+	public char getInput() {
 		char guess = 'A';
 		System.out.println("\n\nGuess a letter in your password:");
 		boolean notValidGuess = true;
@@ -117,27 +119,17 @@ public class DuckyConsole {
 		
 	}
 	//method runs the player turn in console
-	public boolean playerTurn() {
-		char guess = getInput();
-		boolean isWinner = hang.doTurn(guess);
-		
-		if (isWinner) {
-			drawBoard();
-			celebrate();
-			return false;
-		}else if (hang.gameOver()) {
-			boom();
-			return false;
-		}else {
-			return true;
-		}
 
-	}
 	//celebrating victory with a message
-	private void celebrate() {
+	public void celebrate() {
 		System.out.print("\nYOU DID IT\nTHE RUBBER DUCK IS SAVED\n\n");
 	}
 	//method makes an explosion or tree depending on what you see
+	
+	public void gameOver() {
+		boom();
+	}
+	
 	private void boom() {
 		System.out.print("\n\n\n          _ ._  _ , _ ._\r\n"
 				+ "        (_ ' ( `  )_  .__)\r\n"

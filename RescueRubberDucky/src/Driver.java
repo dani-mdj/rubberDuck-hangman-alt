@@ -8,26 +8,55 @@
  * Entry into program
  * directs game to continue to play and draw board until user wants to stop
  */
+import hangmanInterface.IHangmanUI;
+
 public class Driver {
 	
 	public static void main(String[] args) {
+		
+		boolean consoleMode = true;
+		
 		boolean playAgain = true;
 		while (playAgain) {
-			
-			DuckyConsole duck = new DuckyConsole();
+			Hangman hang = new Hangman();
+			IHangmanUI ui;
+			//This if statement appears redundant but it is preparing for 
+			//alternative UI versions
+			if(consoleMode) {
+				ui = new DuckyConsole(hang);
+			}else {
+				ui = new DuckyConsole(hang);//replace with other UI than Console or whatever
+			}
 			boolean gameOn = true;
 			
-			duck.introduction();
+			ui.introduction();
 	
 			while (gameOn) {
-				duck.drawBoard();
-				gameOn = duck.playerTurn();
+				ui.drawBoard();
+				gameOn = playerTurn(ui, hang);
 	
 			}
-			playAgain = duck.playAgain();
+			playAgain = ui.playAgain();
 		}
 		
 		
+	}
+	
+	private static boolean playerTurn(IHangmanUI ui, Hangman hang) {
+		char guess = ui.getInput();
+		boolean isWinner = hang.doTurn(guess);
+		
+		if (isWinner) {
+			ui.drawBoard();
+			ui.celebrate();
+			return false;
+		}else if (hang.gameOver()) {
+			ui.gameOver();
+			return false;
+		}else {
+			return true;
+		}
+
 	}
 
 }
