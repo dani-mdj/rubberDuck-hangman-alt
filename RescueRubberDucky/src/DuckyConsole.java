@@ -100,10 +100,13 @@ public class DuckyConsole {
 			try {
 				guess = userInput.next().charAt(0);
 				userInput.nextLine();
-				if(Character.isLetter(guess)) {
+				if(hang.validGuess(guess)) {
 					notValidGuess = false;
-				}else {
+				}
+				if(!Character.isLetter(guess) ) {
 					System.out.print("This password can only contain letters. Enter a letter!");
+				}else {
+					System.out.print("Already guessed that letter, try again");
 				}
 			}catch(Exception e) {
 				System.out.println("invalid guess, guess a letter");
@@ -136,7 +139,7 @@ public class DuckyConsole {
 	}
 	//method makes an explosion or tree depending on what you see
 	private void boom() {
-		System.out.print("          _ ._  _ , _ ._\r\n"
+		System.out.print("\n\n\n          _ ._  _ , _ ._\r\n"
 				+ "        (_ ' ( `  )_  .__)\r\n"
 				+ "      ( (  (    )   `)  ) _)\r\n"
 				+ "     (__ (_   (_ . _) _) ,__)\r\n"

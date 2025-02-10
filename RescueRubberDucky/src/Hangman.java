@@ -19,6 +19,7 @@ public class Hangman {
 			'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 
 			'w', 'x', 'y', 'z'};
 	private String correctGuess = "";
+	private char[] guessedLetters = new char[11];
 	int turns = 11;
 	int win;
 	
@@ -74,7 +75,8 @@ public class Hangman {
 		}
 		for (int i = 0 ; i < letters.length; i++) {
 			if(guess == letters[i]) {
-				letters[i] = ' ';	
+				letters[i] = ' ';
+				guessedLetters[turns-1] = guess;
 			}
 		}
 	}
@@ -113,5 +115,18 @@ public class Hangman {
 		}		
 	}
 	
+	public boolean validGuess(char guess) {
+		boolean notGuessed = false;
+		
+		System.out.print(guess);
+		if ((new String(guessedLetters)).contains(""+guess)) {
+			System.out.print(guess);
+			notGuessed = false;
+		}else {
+			notGuessed = true;
+		}	
+		
+		return notGuessed;
+	}
 	
 }
